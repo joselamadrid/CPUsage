@@ -26,7 +26,7 @@
 
     CPUUsageLock = [[NSLock alloc] init];
 
-    updateTimer = [[NSTimer scheduledTimerWithTimeInterval:3
+    updateTimer = [[NSTimer scheduledTimerWithTimeInterval:1
                                                     target:self
                                                   selector:@selector(updateInfo:)
                                                   userInfo:nil
@@ -39,7 +39,7 @@
     kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numCPUsU, &cpuInfo, &numCpuInfo);
     if(err == KERN_SUCCESS) {
         [CPUUsageLock lock];
-
+        float avgTotal;
         for(unsigned i = 0U; i < numCPUs; ++i) {
             float inUse, total;
             if(prevCpuInfo) {
@@ -55,8 +55,11 @@
             }
 
             NSLog(@"Core: %u Usage: %f",i,inUse / total);
+            avgTotal += (inUse / total) * 100;
         }
         [CPUUsageLock unlock];
+
+        [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"%i", (int)avgTotal/numCPUs]];
 
         if(prevCpuInfo) {
             size_t prevCpuInfoSize = sizeof(integer_t) * numPrevCpuInfo;
