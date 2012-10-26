@@ -59,7 +59,7 @@
                 total = inUse + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
             }
 
-            NSLog(@"Core: %u Usage: %f",i,inUse / total);
+            //NSLog(@"Core: %u Usage: %f",i,inUse / total);
             avgTotal += (inUse / total) * 100;
         }
         [CPUUsageLock unlock];
@@ -87,8 +87,6 @@
 {
     [updateTimer release];
     [CPUUsageLock release];
-    [CPUUsageLock unlock];
-    
     return NSTerminateNow;
 }
 
