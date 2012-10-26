@@ -13,6 +13,7 @@
 		CEC0A17D16394FA1009C2825 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CEC0A17B16394FA1009C2825 /* Credits.rtf */; };
 		CEC0A18016394FA1009C2825 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC0A17F16394FA1009C2825 /* AppDelegate.m */; };
 		CEC0A18316394FA2009C2825 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC0A18116394FA2009C2825 /* MainMenu.xib */; };
+		CEE971B7163A5FD300034BC3 /* ActivityMonitor.icns in Resources */ = {isa = PBXBuildFile; fileRef = CEE971B6163A5FD300034BC3 /* ActivityMonitor.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		CEC0A17E16394FA1009C2825 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEC0A17F16394FA1009C2825 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CEC0A18216394FA2009C2825 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		CEE971B6163A5FD300034BC3 /* ActivityMonitor.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ActivityMonitor.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 		CEC0A15D16394FA0009C2825 = {
 			isa = PBXGroup;
 			children = (
+				CEE971B6163A5FD300034BC3 /* ActivityMonitor.icns */,
 				CEC0A17216394FA1009C2825 /* CPUsage */,
 				CEC0A16B16394FA0009C2825 /* Frameworks */,
 				CEC0A16916394FA0009C2825 /* Products */,
@@ -156,6 +159,7 @@
 				CEC0A17716394FA1009C2825 /* InfoPlist.strings in Resources */,
 				CEC0A17D16394FA1009C2825 /* Credits.rtf in Resources */,
 				CEC0A18316394FA2009C2825 /* MainMenu.xib in Resources */,
+				CEE971B7163A5FD300034BC3 /* ActivityMonitor.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +299,7 @@
 				CEC0A18816394FA2009C2825 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

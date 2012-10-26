@@ -37,19 +37,24 @@
 {
     natural_t numCPUsU = 0U;
     kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &numCPUsU, &cpuInfo, &numCpuInfo);
-    if(err == KERN_SUCCESS) {
+    if(err == KERN_SUCCESS)
+    {
         [CPUUsageLock lock];
         float avgTotal;
-        for(unsigned i = 0U; i < numCPUs; ++i) {
+        for(unsigned i = 0U; i < numCPUs; ++i)
+        {
             float inUse, total;
-            if(prevCpuInfo) {
+            if(prevCpuInfo)
+            {
                 inUse = (
                          (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER]   - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER])
                          + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM])
                          + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE]   - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE])
                          );
                 total = inUse + (cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] - prevCpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
-            } else {
+            }
+            else
+            {
                 inUse = cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER] + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
                 total = inUse + cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
             }
@@ -61,7 +66,8 @@
 
         [[[NSApplication sharedApplication] dockTile] setBadgeLabel:[NSString stringWithFormat:@"%i", (int)avgTotal/numCPUs]];
 
-        if(prevCpuInfo) {
+        if(prevCpuInfo)
+        {
             size_t prevCpuInfoSize = sizeof(integer_t) * numPrevCpuInfo;
             vm_deallocate(mach_task_self(), (vm_address_t)prevCpuInfo, prevCpuInfoSize);
         }
@@ -75,6 +81,15 @@
         NSLog(@"Error!");
         [NSApp terminate:nil];
     }
+}
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+    [updateTimer release];
+    [CPUUsageLock release];
+    [CPUUsageLock unlock];
+    
+    return NSTerminateNow;
 }
 
 @end
